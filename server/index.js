@@ -3,17 +3,11 @@ const express = require("express"),
   app = express(),
   { json } = require("body-parser"),
   puppeteer = require("puppeteer"),
-  port = 3988;
+  port = 3988,
+  axios = require("axios"),
+  { scrapeGitHub } = require("./controllers/webScraper");
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto(
-    "https://github.com/steven-isbell/resources/blob/master/sql/README.md"
-  );
-  const cool = await page.screenshot({ path: "example.png" });
-  await browser.close();
-})();
+app.post("/api/scrape-web", scrapeGitHub);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
