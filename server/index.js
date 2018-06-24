@@ -6,8 +6,8 @@ const express = require("express"),
   port = 3988,
   axios = require("axios"),
   { scrapeGitHub } = require("./controllers/webScraper");
-
-app.post("/api/scrape-web", scrapeGitHub);
+app.use(json());
+app.put("/api/scrape-web", scrapeGitHub);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
